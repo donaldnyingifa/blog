@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import styled from "styled-components"
+import Img from "gatsby-image"
 
 import Layout from "../components/layout"
 //import Image from "../components/image"
@@ -27,8 +28,9 @@ export default ({ data }) => {
               <BlogTitle>
                 {node.frontmatter.title} - {node.frontmatter.date}
               </BlogTitle>
+
             </BlogLink>
-            
+            <Img fluid={node.frontmatter.featuredImage.childImageSharp.fluid} />
             <p>{node.excerpt}</p>
           </div>
         ))}
@@ -49,6 +51,13 @@ query {
           date
           description
           title
+          featuredImage {
+            childImageSharp {
+              fluid(maxWidth: 800) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
         }
         fields {
           slug

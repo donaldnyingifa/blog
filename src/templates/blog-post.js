@@ -20,7 +20,14 @@ export const query = graphql `
             html
             frontmatter {
                 title
-            }
+                featuredImage {
+                    childImageSharp {
+                      fluid(maxWidth: 800) {
+                        ...GatsbyImageSharpFluid
+                      }
+                    }
+                  }
+              }
         }
     }
 `
